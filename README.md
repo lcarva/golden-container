@@ -1,6 +1,8 @@
 # golden-container
 Trivial definition of an image build in compliance with HACBS policy
 
+TEST
+
 # To build in AppStudio
 
 Best use `hack/rebuild.sh` from [ec-cli](https://github.com/hacbs-contract/ec-cli). To build manually create the following `PipelineRun`:
