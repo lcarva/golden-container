@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/enterprise-contract/golden-container?rev={{revision}}
+    build.appstudio.openshift.io/repo: https://github.com/lcarva/golden-container?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
     pipelinesascode.tekton.dev/max-keep-runs: "3"
@@ -13,7 +13,7 @@ metadata:
     appstudio.openshift.io/component: golden-container
     pipelines.appstudio.openshift.io/type: build
   name: golden-container-on-push
-  namespace: rhtap-contract-tenant
+  namespace: lucarval-tenant
 spec:
   params:
   - name: dockerfile
@@ -21,7 +21,7 @@ spec:
   - name: git-url
     value: '{{repo_url}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/rhtap-contract-tenant/golden-container/golden-container:{{revision}}
+    value: quay.io/redhat-user-workloads/lucarval-tenant/golden-container/golden-container:{{revision}}
   - name: path-context
     value: .
   - name: revision
