@@ -25,16 +25,8 @@ spec:
     - name: dockerfile
       value: Containerfile
   pipelineRef:
-    name: build
+    name: docker-build-oci-ta
   workspaces:
-    - name: workspace
-      volumeClaimTemplate:
-        spec:
-          accessModes:
-          - ReadWriteOnce
-          resources:
-            requests:
-              storage: 1Gi
     - name: git-auth
       secret:
         secretName: '{{ git_auth_secret }}'
