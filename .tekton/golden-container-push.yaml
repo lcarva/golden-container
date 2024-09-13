@@ -327,13 +327,14 @@ spec:
       - build-image-index
       taskRef:
         params:
-        - name: name
-          value: clair-scan
-        - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-clair-scan:0.1@sha256:baea4be429cf8d91f7c758378cea42819fe324f25a7f957bf9805409cab6d123
-        - name: kind
-          value: task
-        resolver: bundles
+        params:
+        - name: url
+          value: https://github.com/lcarva/build-definitions
+        - name: revision
+          value: KFLUXBUGS-1616
+        - name: pathInRepo
+          value: task/clair-scan/0.1/clair-scan.yaml
+        resolver: git
       when:
       - input: $(params.skip-checks)
         operator: in
@@ -395,13 +396,13 @@ spec:
       - build-image-index
       taskRef:
         params:
-        - name: name
-          value: clamav-scan
-        - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-clamav-scan:0.1@sha256:0e61e7fce97b089b216eccd8390b1c2a265454c81c6630449e0f648dfcd4fcfe
-        - name: kind
-          value: task
-        resolver: bundles
+        - name: url
+          value: https://github.com/lcarva/build-definitions
+        - name: revision
+          value: KFLUXBUGS-1616
+        - name: pathInRepo
+          value: task/clamav-scan/0.1/clamav-scan.yaml
+        resolver: git
       when:
       - input: $(params.skip-checks)
         operator: in
