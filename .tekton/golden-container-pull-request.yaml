@@ -23,7 +23,8 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/lucarval-tenant/golden-container/golden-container:on-pr-{{revision}}
+    # value: quay.io/redhat-user-workloads/lucarval-tenant/golden-container/golden-container:on-pr-{{revision}}
+    value: quay.io/lucarval/kfluxbugs-1692:on-pr-{{revision}}
   - name: image-expires-after
     value: 5d
   - name: dockerfile

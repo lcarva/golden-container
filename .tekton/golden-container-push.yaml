@@ -22,7 +22,8 @@ spec:
   - name: revision
     value: '{{revision}}'
   - name: output-image
-    value: quay.io/redhat-user-workloads/lucarval-tenant/golden-container/golden-container:{{revision}}
+    # value: quay.io/redhat-user-workloads/lucarval-tenant/golden-container/golden-container:{{revision}}
+    value: quay.io/lucarval/kfluxbugs-1692:{{revision}}
   - name: dockerfile
     value: Containerfile
   pipelineSpec:
