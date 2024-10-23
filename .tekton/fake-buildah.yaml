@@ -1,0 +1,45 @@
+---
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: fake-buildah
+spec:
+  params:
+    - name: IMAGE
+      type: string
+  results:
+  - name: IMAGE_DIGEST
+    description: Digest of the image just built.
+    type: string
+  - name: IMAGE_URL
+    description: Image repository where the built image would be pushed to
+    type: string
+  - name: IMAGE_REF
+    description: Image reference of the built image
+    type: string
+  - name: SBOM_BLOB_URL
+    description: Reference of SBOM blob digest to enable digest-based verification from provenance
+    type: string
+  steps:
+  - name: fake-build
+    image: quay.io/konflux-ci/oras:latest@sha256:0fdcb8ad0528042006457e57281532409a4d6e891f61208f96ab2b7b7b1746b6
+    env:
+      - name: IMAGE
+        value: $(params.IMAGE)
+    script: |
+      set -euo pipefail
+
+      date > artifact.txt
+
+      echo "Selecting auth"
+      select-oci-auth "${IMAGE}" > "auth.json"
+
+      digest="$(
+        oras push --registry-config auth.json --artifact-type 'application/spam' "${IMAGE}" artifact.txt |
+        grep 'Digest:' | cut -d' ' -f 2)"
+
+      echo -n "${IMAGE}" | tee $(results.IMAGE_URL.path)
+      echo -n "${digest}" | tee $(results.IMAGE_DIGEST.path)
+      echo -n "${IMAGE}@${digest}" | tee $(results.IMAGE_REF.path)
+      # TODO:
+      touch $(results.SBOM_BLOB_URL.path)
