@@ -22,7 +22,7 @@ spec:
     type: string
   steps:
   - name: fake-build
-    image: quay.io/konflux-ci/oras:latest@sha256:01eefaa038b71c375a524a79618d9008a0f4692e03ac869f15901059df727463
+    image: quay.io/konflux-ci/oras:latest@sha256:77f88b4fd05e6cb1fc8ec7b7ab76f2a109a56c2357981bdcc1fbc946dde42b04
     env:
       - name: IMAGE
         value: $(params.IMAGE)
